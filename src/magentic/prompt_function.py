@@ -35,6 +35,12 @@ class BasePromptFunction(Generic[P, R]):
     ):
         self._name = name
         self._signature = inspect.Signature(
+            # --- RECRUITER / STUDY NOTE ---
+# This block dynamically inspects the wrapped function's signature at runtime.
+# By extracting the `return_annotation` using the `inspect` module, 
+# the framework can pass this type to Pydantic to coerce the unstructured
+# LLM text into a strict JSON schema matching the developer's type hint.
+# ------------------------------
             parameters=parameters,
             return_annotation=return_type,
         )
