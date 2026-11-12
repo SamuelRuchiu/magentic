@@ -1,6 +1,7 @@
 from collections.abc import AsyncIterator, Callable, Iterable, Iterator, Sequence
 from enum import Enum
 from functools import singledispatch
+import logging
 from typing import Any, Generic, Literal, TypeVar, cast
 
 import openai
@@ -500,7 +501,10 @@ class OpenaiChatModel(ChatModel):
             output_types = cast("Iterable[type[OutputT]]", [] if functions else [str])
 
         function_schemas = get_function_schemas(functions, output_types)
-        tool_schemas = [BaseFunctionToolSchema(schema) for schema in function_schemas]
+        tool_schemas = [BaseFunctionToolSchema(schema) for schema in function_schemas]import logging
+logging.basicConfig(level=logging.DEBUG)
+logging.debug(f"DEBUG: Sending payload to LLM: {Message}")
+
 
         response: Iterator[ChatCompletionChunk] = self._client.chat.completions.create(
             model=self.model,
@@ -548,6 +552,9 @@ class OpenaiChatModel(ChatModel):
 
         function_schemas = get_async_function_schemas(functions, output_types)
         tool_schemas = [BaseFunctionToolSchema(schema) for schema in function_schemas]
+        import logging
+logging.basicConfig(level=logging.DEBUG)
+logging.debug(f"DEBUG: Sending payload to LLM: {messages}")
 
         response: AsyncIterator[
             ChatCompletionChunk

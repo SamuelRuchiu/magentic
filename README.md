@@ -1,5 +1,24 @@
 # magentic
 
+# 🔬 My Study Notes: Magentic Codebase Breakdown
+
+_Note: This is a forked repository I am using to deeply study advanced Python decorators, Pydantic schema coercion, and LLM integrations. Below are my reverse-engineering notes and modifications._
+
+## 🧠 Core Architecture Learnings
+
+1. **Metaprogramming & Decorators:** I traced the `@prompt` decorator to understand how it intercepts function calls, parses the docstring/string templates, and injects variables dynamically before sending them to the LLM backend.
+2. **Type Coercion:** I studied how the library leverages `inspect.signature` to read Python return type hints, dynamically generating JSON schemas via Pydantic to force structured LLM outputs.
+3. **Async Support:** Reviewed the implementation of asynchronous generators to handle streaming LLM responses without blocking the main event loop.
+
+## 🛠️ My Modifications
+
+- Added debug logging to the core API request cycle to monitor raw token payloads.
+- Commented complex abstract syntax tree (AST) and inspection logic for clarity.
+- Built a custom `examples/data_extraction_example.py` demonstrating how to use this framework to parse unstructured financial data into strict Pydantic schemas for data analysis.
+
+---
+
+_(Original Repository Readme Below)_
 Seamlessly integrate Large Language Models into Python code. Use the `@prompt` and `@chatprompt` decorators to create functions that return structured output from an LLM. Combine LLM queries and tool use with traditional Python code to build complex agentic systems.
 
 ## Features
@@ -185,7 +204,6 @@ LLM-powered functions created using `@prompt`, `@chatprompt` and `@prompt_chain`
 [LLM-Assisted Retries]: https://magentic.dev/retrying.md
 [Configuration]: https://magentic.dev/configuration
 [Type Annotations]: https://magentic.dev/type-checking
-
 
 ### Streaming
 

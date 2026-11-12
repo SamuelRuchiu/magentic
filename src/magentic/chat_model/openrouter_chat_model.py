@@ -203,6 +203,9 @@ class _OpenRouterOpenaiChatModel(OpenaiChatModel):
 
         function_schemas = get_function_schemas(functions, output_types)
         tool_schemas = [BaseFunctionToolSchema(schema) for schema in function_schemas]
+        import logging
+logging.basicConfig(level=logging.DEBUG)
+logging.debug(f"DEBUG: Sending payload to LLM: {messages}")
 
         response: Iterator[ChatCompletionChunk] = self._client.chat.completions.create(
             model=self.model,
@@ -250,6 +253,9 @@ class _OpenRouterOpenaiChatModel(OpenaiChatModel):
 
         function_schemas = get_async_function_schemas(functions, output_types)
         tool_schemas = [BaseFunctionToolSchema(schema) for schema in function_schemas]
+        import logging
+logging.basicConfig(level=logging.DEBUG)
+logging.debug(f"DEBUG: Sending payload to LLM: {messages}")
 
         response: AsyncIterator[
             ChatCompletionChunk

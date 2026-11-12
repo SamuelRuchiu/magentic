@@ -124,6 +124,10 @@ class PromptDecorator(Protocol):
     @overload
     def __call__(self, func: Callable[P, R]) -> PromptFunction[P, R]: ...
 
+# TODO: (Triton) - Study Note: This acts as a decorator factory. 
+# It captures the LLM configuration state (template, tools, model) 
+# and passes it down to the PromptDecorator, which uses Python's inspect 
+# module to replace the decorated function's body with an LLM API call.
 
 def prompt(
     template: str,
